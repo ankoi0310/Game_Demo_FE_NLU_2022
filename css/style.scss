@@ -1,15 +1,24 @@
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+$canvas-size: 400px;
 
-canvas {
-    border: 5px solid red;
-    box-shadow: black 20px 10px 50px;
+.canvas {
+    position: relative;
+    width: $canvas-size;
+    height: $canvas-size;
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    #layer-1 {
+        box-shadow: black 20px 10px 50px;
+        z-index: 1;
+    }
+
+    #layer-2 {
+        z-index: 2;
+    }
 }
 
 .title {

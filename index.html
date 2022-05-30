@@ -7,11 +7,24 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1 class="title">Snake Game</h1>
-    <canvas id="canvas" class="bg-dark" width="400" height="400"></canvas>
+    <div class="container d-flex flex-column text-center">
+        <h1 class="title">Snake Game</h1>
+        <div class="controls mb-4">
+            <button id="start" class="btn btn-primary">Start</button>
+            <button id="pause" class="btn btn-primary">Pause</button>
+            <button id="reset" class="btn btn-primary">Reset</button>
+        </div>
+        <div class="container canvas">
+            <canvas id="layer-1" class="bg-dark" width="400" height="400"></canvas>
+            <canvas id="layer-2" width="400" height="400"></canvas>
+        </div>
+    </div>
 
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
+    <script type="module" src="js/block.js"></script>
+    <script type="module" src="js/snakeTail.js"></script>
+    <script type="module" src="js/level.js"></script>
+    <script type="module" src="js/script.js"></script>
 </body>
 </html>
