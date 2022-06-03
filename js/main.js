@@ -1,9 +1,43 @@
-import {LevelManagement} from './level.js';
-import {SnakeTail} from "./snakeTail.js";
-import {Block} from "./block.js";
+/* CLASSES */
+class SnakeTail {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
 
-//////////////////////////////////////////////////////////////
+class Block {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
 
+class Level {
+    constructor(point, blockRate, hasFoodTiming, hasBlockDropdown) {
+        this.point = point;
+        this.blockRate = blockRate;
+        this.hasFoodTiming = hasFoodTiming;
+        this.hasBlockDropdown = hasBlockDropdown;
+    }
+}
+
+class LevelManagement {
+
+    static createLevel() {
+        const listLevel = new Map();
+
+        for (let i = 0; i <= NUMBER_OF_LEVEL; i++) {
+            listLevel.set(i+1, new Level(LIST_POINT_PER_LEVEL[i],
+                BLOCK_RATE_PER_LEVEL[i], FOOD_TIMING_PER_LEVEL[i],
+                BLOCK_DROPDOWN_PER_LEVEL[i]));
+        }
+
+        return listLevel;
+    }
+}
+
+/* CONSTANT VARIABLES */
 const layer1 = $('canvas#layer-1')[0];
 const layer2 = $('canvas#layer-2')[0];
 const ctx1 = layer1.getContext('2d');
@@ -12,7 +46,13 @@ const WIDTH = layer1.width;
 const HEIGHT = layer1.height;
 const GRID_COUNT = 20; // DEFAULT, create a grid with 20x20 blocks
 const GRID_SIZE = WIDTH / GRID_COUNT - 2; // 2px border around the canvas
+const NUMBER_OF_LEVEL = 5;
+const LIST_POINT_PER_LEVEL = [5, 5, 5, 5, 5];
+const BLOCK_RATE_PER_LEVEL = [0, 0.2, 0.4, 0.4, 0.6];
+const FOOD_TIMING_PER_LEVEL = [0, 0, 1, 1, 1]; // 0 => false, 1 => true
+const BLOCK_DROPDOWN_PER_LEVEL = [0, 0, 0, 1, 1]; // 0 => false, 1 => true
 const DEFAULT_TIMING = 2500; // milisecond
+
 const LEVEL = LevelManagement.createLevel(); // static method from LevelManagement
 
 let FPS; // GAME LOOP
@@ -22,7 +62,6 @@ let SPEED = 10;
 let SCORE = 0;
 
 let inputVelocity = { x: 0, y: 0, }; // velocity from keyboard, change when keydown, default is 0
-
 //////////////////////////////////////////////////////////////
 
 // Define a snake
