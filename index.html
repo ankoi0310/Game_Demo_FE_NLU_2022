@@ -44,24 +44,6 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="home-modal" tabindex="-1" aria-labelledby="alert" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger">
-                    <h5 class="modal-title">Alert</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to return home screen?</p>
-                    <span>Your current game will reset.</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#pause-modal">Cancel</button>
-                    <button type="button" id="homeBtn" class="btn btn-primary">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!--  Change speed modal  -->
     <div class="modal fade" id="speed-modal" tabindex="-1" aria-labelledby="alert" aria-hidden="true">
@@ -77,31 +59,12 @@
                     </div>
                     <div class="form-group">
                         <label for="speed-input">Fill an input below to set your new speed</label>
-                        <input type="number" id="speed-input" class="form-control" placeholder="Ex: 10" required>
+                        <input onkeypress="submitSpeed(event)" type="number" id="speed-input" class="form-control" placeholder="Ex: 10" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" id="changeSpeedBtn" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--  Close tab modal  -->
-    <div class="modal fade" id="close-tab" tabindex="-1" aria-labelledby="alert" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Alert</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to close this tab?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" id="closeTabBtn" class="btn btn-primary">OK</button>
                 </div>
             </div>
         </div>
@@ -148,6 +111,113 @@
         </div>
     </div>
 
+    <!--  How to play modal  -->
+    <div class="modal fade" id="how-to-play-modal" tabindex="-1" aria-labelledby="alert" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-success bg-opacity-75">
+                    <h5 class="modal-title">This is how to play Snake Game</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <h4>I. Các phím tắt</h4>
+                        <ul>
+                            <li><b>ESC (trong khi chơi):</b> tạm dừng trò chơi.</li>
+                            <li><b>SPACEBAR (trong khi chơi):</b> khởi động lại trò chơi, bắt đầu trò chơi mới.</li>
+                            <li><b>ENTER (sau khi qua màn):</b> bắt đầu màn chơi mới</li>
+                        </ul>
+                        <hr>
+                        <span><h4 class="fw-bold d-inline">II. Di chuyển:</h4> Sử dụng các phím mũi tên và chữ cái tương ứng để di chuyển</span>
+                        <table>
+                            <tr>
+                                <td>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"/>
+                                        </svg> hoặc phím <b>W</b>
+                                    </li>
+                                </td>
+                                <td>: lên</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0z"/>
+                                        </svg> hoặc phím <b>S</b>
+                                    </li>
+                                </td>
+                                <td>: phải</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                                            <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                                        </svg> hoặc phím <b>D</b>
+                                    </li>
+                                </td>
+                                <td>: xuống</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                                            <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                                        </svg> hoặc phím <b>A</b>
+                                    </li>
+                                </td>
+                                <td>: trái</td>
+                            </tr>
+                        </table>
+                        <hr>
+                        <span><h4 class="fw-bold d-inline">III. Va chạm:</h4> trò chơi sẽ kết thúc khi</span>
+                        <ul>
+                            <li>Rắn chạm vào cơ thể của nó.</li>
+                            <li>Rắn đụng vào tường.</li>
+                            <li>Rắn đang di chuyển và đụng vào vật cản.</li>
+                        </ul>
+                        <hr>
+                        <h4 class="fw-bold">IV. Cách tính điểm qua màn, hoàn thành trò chơi</h4>
+                        <ul>
+                            <li>
+                                <b>Qua màn</b>: mỗi màn có số điểm cần để vượt qua (5 điểm), khi rắn ăn thức ăn sẽ được cộng 1 điểm.
+                            </li>
+                            <li>
+                                <b>Hoàn thành trò chơi</b>: Khi bạn qua được màn cuối của trò chơi.
+                            </li>
+                        </ul>
+                        <h3 class="text-center mt-3 text-danger" style="font-family: 'Games', serif;">GOODLUCK !!!</h3>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I got it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Close tab modal  -->
+    <div class="modal fade" id="close-tab" tabindex="-1" aria-labelledby="alert" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alert</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to close this tab?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" id="closeTabBtn" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--  Pause modal  -->
     <div class="modal fade" id="pause-modal" tabindex="-1" aria-labelledby="pause-modal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -165,7 +235,6 @@
                                 <button type="button" class="btn btn-primary mb-2" id="home" data-bs-dismiss="modal">Home</button>
                                 <button type="button" class="btn btn-primary mb-2" title="Click to change speed" data-bs-toggle="modal" data-bs-target="#speed-modal">Change speed</button>
                                 <button type="button" class="btn btn-primary mb-2" title="Click to change level" data-bs-toggle="modal" data-bs-target="#level-modal">Change level</button>
-                                <button type="button" class="btn btn-primary" >Exit</button>
                             </div>
                         </div>
                     </div>
@@ -174,19 +243,21 @@
         </div>
     </div>
 
-    <!--  How to play modal  -->
-    <div class="modal fade" id="how-to-play-modal" tabindex="-1" aria-labelledby="alert" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <!-- Back to home -->
+    <div class="modal fade" id="home-modal" tabindex="-1" aria-labelledby="alert" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header bg-success bg-opacity-75">
-                    <h5 class="modal-title">This is how to play Snake Game</h5>
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title">Alert</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Oops, I forgot to write something here.
+                    <p>Are you sure you want to return home screen?</p>
+                    <span>Your current game will reset.</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I got it</button>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#pause-modal">Cancel</button>
+                    <button type="button" id="homeBtn" class="btn btn-primary">OK</button>
                 </div>
             </div>
         </div>

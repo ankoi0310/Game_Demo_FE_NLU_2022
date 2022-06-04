@@ -411,6 +411,7 @@ function reset() {
 
 /* ACTIONS */
 let $gameArea = $('#game-area');
+let $level = $('#level-modal .level');
 
 $(function () {
     // Default settings
@@ -438,13 +439,14 @@ $('html').keydown(function (e) {
             }
             break;
         case 27: // esc => pause
-            if ($('#game-area').hasClass('d-flex')) {
+            if ($('#pause-modal').hasClass('fade')) {
                 $('#pause-modal').modal('show');
-            }
+            } else return;
 
             if (game.isOver) return;
 
             game.isPause = !game.isPause;
+            console.log(game.isPause);
 
             if (game.isPause) {
                 clearInterval(FOOD_TIMING);
@@ -530,8 +532,13 @@ $('#resume').click(function () {
     updateScreen();
 });
 
-$('#level-modal .level').click(function () {
+$level.click(function () {
     $(this).addClass('active bg-info').siblings().removeClass('active bg-info');
+});
+
+$level.dblclick(function () {
+    $(this).addClass('active bg-info');
+    $('#submitLevelBtn').click();
 });
 
 $('#submitLevelBtn').click(function () {
@@ -559,7 +566,25 @@ $('#changeSpeedBtn').click(function () {
     $('#toast-form .toast-body').text('Speed changed to ' + SPEED);
     $('#toast-form').toast('show');
 
-    // clearTimeout(FPS);
-    // game.isPause = false;
-    // updateScreen();
+    if (game.isPause) $('#pause-modal').modal('show');
 })
+
+$('#level-modal').on('hidden.bs.modal', function () {
+    if (game.isPause) $('#pause-modal').modal('show');
+});
+
+$('#speed-modal').on('hidden.bs.modal', function () {
+    if (game.isPause) $('#pause-modal').modal('show');
+});
+
+$('#pause-modal').on('hidden.bs.modal', function () {
+    $('#resume').click();
+});
+
+function submitSpeed(e) {
+    let key = 'which' in e ? e.which : e.keyCode;
+    if (key === 13) {
+        $('#changeSpeedBtn').click();
+        $('#speed-modal').modal('hide');
+    }
+}

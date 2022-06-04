@@ -32,6 +32,10 @@ body {
   animation: mover 1s infinite alternate;
 }
 
+#how-to-play-modal .modal-body {
+  font-family: "Candara", sans-serif;
+}
+
 #game-area {
   margin: 0 auto;
   padding: 0;
